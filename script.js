@@ -35,19 +35,25 @@ function createClubCardHTML(club) {
 function handleClubClick(element) {
     // Write your code here for task1
         // Get the name of the clicked club
-        
+        let clubName = element.getElementsByTagName("h2")[0].innerHTML;
+        //console.log(clubName)
         // Find the selected club by its name
-              
+        let clubCard = clubData.find(obj => obj.name === clubName);   
+        //console.log(clubCard)
         // Display details of the selected club
-            
+        displayClubDetails(clubCard);
     }
 
 
 // Display football club details
 function displayClubDetails(club) {
     // Write your code here for task2
-        // Create a club details HTML using template strings
-    
+    // Create a club details HTML using template strings
+    return `
+        <div class="club-details"
+        <h2> THIS IS A TEST </h2>
+        </div>
+    `;
     // Set the club details HTML in the clubDetailsContainer
     
 }
