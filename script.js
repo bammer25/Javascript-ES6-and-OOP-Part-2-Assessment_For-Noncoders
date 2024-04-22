@@ -41,6 +41,8 @@ function handleClubClick(element) {
         let clubCard = clubData.find(obj => obj.name === clubName);   
         //console.log(clubCard)
         // Display details of the selected club
+        //const selectedClub = clubData.find(club => club.name === clubName);
+        //console.log(selectedClub)
         displayClubDetails(clubCard);
     }
 
@@ -49,11 +51,7 @@ function handleClubClick(element) {
 function displayClubDetails(club) {
     // Write your code here for task2
     // Create a club details HTML using template strings
-    return `
-        <div class="club-details"
-        <h2> THIS IS A TEST </h2>
-        </div>
-    `;
+
     // Set the club details HTML in the clubDetailsContainer
     
 }
@@ -62,7 +60,7 @@ function displayClubDetails(club) {
 function viewClubPlayers(clubName) {
     // Find the selected club by its name
     const selectedClub = clubData.find(club => club.name === clubName);
-    
+    console.log(selectedClub)
     // Write your code here for task3
     // Generate HTML for the list of players and display it
 
