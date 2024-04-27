@@ -68,7 +68,10 @@ function displayClubDetails(club) {
             <img src="${club.image}" >
             <p><b>League: </b>${club.league}</p>
             <p><b>City: </b>${club.city}</p>
+            <p><b>Stadium: </b>${club.stadium}</p>
+            
             <button onclick="viewClubPlayers('${club.name}'); event.stopPropagation();" style="width:20%;">View Players</button>
+            <p><b>Description: </b>${club.description}</p>
 
             
         `;
@@ -111,7 +114,7 @@ function viewClubPlayers(clubName) {
     <P><b> Assists:</b> ${selectedClub["players"][1]["assists"]}</P>
     </div>
     
-    div class = playerinfo>
+    
     <P><b> Name:</b> ${selectedClub["players"][2]["name"]}</P>
     <P><b> Position:</b> ${selectedClub["players"][2]["position"]}</P>
     <P><b> Goals:</b> ${selectedClub["players"][2]["goals"]}</P>
