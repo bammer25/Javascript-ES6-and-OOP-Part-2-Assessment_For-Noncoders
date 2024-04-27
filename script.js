@@ -35,15 +35,25 @@ function createClubCardHTML(club) {
 function handleClubClick(element) {
     // Write your code here for task1
         // Get the name of the clicked club
-        let clubName = element.getElementsByTagName("h2")[0].innerHTML;
-        console.log(clubName);
+        const clickedClubCard = element;
+        if (clickedClubCard){
+        const clickedClubName = clickedClubCard.querySelector("h2").textContent;
+
+            // Find the selected club by its name
+            const selectedClub = clubData.find(
+                (club) => club.name === clickedClubName
+            );
+            if(selectedClub) {
+
+            // Display details of the selected club
+            displayClubDetails(selectedClub);
+
+            }
+
+
+        }
         
-        // Find the selected club by its name
-        let clubCard = clubData.find(obj => obj.name === clubName);
-        console.log(clubCard);
-              
-        // Display details of the selected club
-        displayClubDetails(clubCard);
+        
     }
 
 
@@ -51,17 +61,17 @@ function handleClubClick(element) {
 function displayClubDetails(club) {
     // Write your code here for task2
         // Create a club details HTML using template strings
-        const clubDetailsHTML = `
-        <div>
-            <h2>${club.name}</h2><br>
-            <img src="${club.image}" alt="${club.name} Image" 
-            <p><b>League: </b>${club.league}</p><br>
-            <p><b>City: </b>${club.city}</p><br>
-            <button onclick="viewClubPlayers('${club.name}'); ">View Players</button>
-        </div>
-    
+        const clubDetailsHTML = 
+        `
+        <button onclick="window.location.reload();"> Back</button>
+            <h2>${club.name}</h2>
+            <img src="${club.image}" >
+            <p><b>League: </b>${club.league}</p>
+            <p><b>City: </b>${club.city}</p>
+            <button onclick="viewClubPlayers('${club.name}'); event.stopPropagation();" style="width:20%;">View Players</button>
+
+            
         `;
-        console.log(clubDetailsHTML);
 
     // Set the club details HTML in the clubDetailsContainer
     clubDetailsContainer.innerHTML = clubDetailsHTML;
@@ -74,76 +84,72 @@ function viewClubPlayers(clubName) {
     
     // Write your code here for task3
     // Generate HTML for the list of players and display it
-    function generateClubPlayerList(club) {
-        const listOfPlayers = `
-        <ul>
-                <li>
-                    // <strong>Name:</strong> ${club.name}<br>
-                    <strong>Name:</strong> ${club.name}<br>
-                    <strong>Position:</strong> ${club.position}<br>
-                    <strong>Number:</strong> ${club.number}<br>
-                    <strong>Goals:</strong> ${club.goals}<br>
-                    <strong>Assists:</strong> ${club.assists}
-                </li>
-        </ul>
-
-        `;
-        console.log(listOfPlayers);
-        
-    }
-    // Iterate over selectedClub object's players property
-    function iteratePlayers(selectedClub) {
-        const players = selectedClub.players;
-        players.forEach(player => {
-            console.log(player.name); 
-        });
-    }
     
-    iteratePlayers(selectedClub);
+    // Iterate over selectedClub object's players property
+    
 
     // Create a string joining the information of all the players of the selected Club 
-    function playerInformation(club) {
-        let playerInfoString = '';
-        club.players.forEach(player => {
-            playerInfoString += `
-    Name: ${player.name}
-    Position: ${player.position}
-    Number: ${player.number}
-    Goals: ${player.goals}
-    Assists: ${player.assists}
-    
-    `;
-        });
-        return playerInfoString;
-    }
-    const playerInformationString = playerInformation(selectedClub);
 
-    console.log(playerInformationString);
+    
 
     // Display the information by setting the HTML in the clubDetailsContainer
-    function playerElement (player) {
-        let html = '';
-        player.forEach(item => {
-            html += `
-                <div> ${item}</div>
-            `;
-        });
+    const playersList = `
+    <div class = playerinfo>
+    <button onclick="window.location.reload();"> Back</button>
+    <h2>${clubName}</h2>
 
-        document.getElementById(clubDetailsContainer).innerHTML = html;
-    }
-}
+    <P><b> Name:</b> ${selectedClub["players"][0]["name"]}</P>
+    <P><b> Position:</b> ${selectedClub["players"][0]["position"]}</P>
+    <P><b> Goals:</b> ${selectedClub["players"][0]["goals"]}</P>
+    <P><b> Assists:</b> ${selectedClub["players"][0]["assists"]}</P>
+    </div>
 
-// Handle search input and filter clubs
-function handleSearchInput() {
-    // Write your code here for task4
-    const searchBar = document.getElementById("search");
+    <div class = playerinfo>
+    <P><b> Name:</b> ${selectedClub["players"][1]["name"]}</P>
+    <P><b> Position:</b> ${selectedClub["players"][1]["position"]}</P>
+    <P><b> Goals:</b> ${selectedClub["players"][1]["goals"]}</P>
+    <P><b> Assists:</b> ${selectedClub["players"][1]["assists"]}</P>
+    </div>
     
-    }
+    div class = playerinfo>
+    <P><b> Name:</b> ${selectedClub["players"][2]["name"]}</P>
+    <P><b> Position:</b> ${selectedClub["players"][2]["position"]}</P>
+    <P><b> Goals:</b> ${selectedClub["players"][2]["goals"]}</P>
+    <P><b> Assists:</b> ${selectedClub["players"][2]["assists"]}</P>
+    </div>`
+
+    clubDetailsContainer.innerHTML = playersList;
+
+};
+
+    
+    // Handle search input and filter clubs
+    function handleSearchInput() {
+    // Write your code here for task4
+    
     
     // Get the search term and convert it to lowercase for case-insensitive search
-    // const sreachTerm = target.value.toLowerCase();
-    // Create a string containing club details for searching
-    
-    // Check if the search term is found in the club data string
+    const searchTerm = searchInput.value.toLowerCase();
+    const filterClubs = clubData.filter((club) => {
+
+        // Create a string containing club details for searching
+        const clubString = `${club.name} ${club.league} ${club.city} ${club.stadium} ${club["players"][0]["name"]}
+        ${club["players"][1]["name"]} ${club["players"][2]["name"]}`.toLowerCase();
         
-    // Display the filtered clubs
+        // Check if the search term is found in the club data string
+        return clubString.includes(searchTerm);
+
+      });
+
+        // Display the filtered clubs
+        displayClubs(filterClubs);
+    }
+    
+
+    
+    
+    
+    
+        
+    
+    
